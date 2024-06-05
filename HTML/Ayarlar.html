@@ -1,0 +1,134 @@
+<!--Website: wwww.codingdung.com-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayarlar</title>
+    <link rel="stylesheet" href="../CSS/Ayarlar.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="body">
+    <div class="container light-style flex-grow-1 container-p-y">
+      <h4 class="font-weight-bold py-3 mb-4" style="color: #fff">
+        Hesap Ayarları
+      </h4>
+      <div class="card overflow-hidden">
+        <div class="row no-gutters row-bordered row-border-light">
+          <div class="col-md-3 pt-0">
+            <div class="list-group list-group-flush account-settings-links">
+              <a
+                class="list-group-item list-group-item-action active"
+                data-toggle="list"
+                href="#account-general"
+                >Genel Ayarlar</a
+              >
+              <a
+                class="list-group-item list-group-item-action"
+                data-toggle="list"
+                href="#account-change-password"
+                >Şifre Değiştir</a
+              >
+              <a
+                class="list-group-item list-group-item-action"
+                data-toggle="list"
+                href="#account-change-number"
+                >Numara Değiştir</a
+              >
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="tab-content">
+              <div class="tab-pane fade active show" id="account-general">
+                <div class="card-body media align-items-center">
+                    <img src="images/MeetMate Logo (Light).png" alt class="d-block ui-w-80"/>
+                    <div class="media-body ml-4">
+                        <label class="btn btn-outline-primary">
+                            Bir Resim Yükle
+                            <input type="file" class="account-settings-fileinput" />
+                        </label>
+                        &nbsp;
+                        <button type="button" class="btn btn-default md-btn-flat">
+                            Sıfırla
+                        </button>
+                        <div class="text-light small mt-1">
+                            Desteklenen JPG, GIF or PNG.
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-light m-0" />
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">Kullanıcı Adı</label>
+                        <input id="nameInput" type="text" class="form-control mb-1" value="" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">İsim-Soyisim</label>
+                        <input id="fullNameInput" type="text" class="form-control" value=""/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">E-mail</label>
+                        <input id="emailInput" type="email" class="form-control mb-1" value=""/>
+                        <div class="alert alert-warning mt-3">
+                            e-Mailiniz onaylanmadı. Lütfen kutunuzu kontrol edin!<br />
+                            <a href="javascript:void(0)">Yeniden Gönder</a>
+                        </div>
+                    </div>
+                </div>              
+            </div>
+              <div class="tab-pane fade" id="account-change-password">
+                <div class="card-body pb-2">
+                  <div class="form-group">
+                    <label class="form-label">Güncel Şifre</label>
+                    <input id="currentPassword" type="password" class="form-control" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Yeni Şifre</label>
+                    <input id="newPassword" type="password" class="form-control" required/>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Yeni Şifre Tekrar</label>
+                    <input id="confirmNewPassword" type="password"  name="confirmNewPassword" class="form-control" required/>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="account-change-number">
+                <div class="card-body pb-2">
+                  <div class="form-group">
+                    <label class="form-label">Güncel Numara</label>
+                    <input id="currentNumber" type="text" class="form-control" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Yeni Numara</label>
+                    <input id="newNumber" type="text" class="form-control" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Yeni Numara Tekrar</label>
+                    <input id="confirmNewNumber" type="text" class="form-control" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-right mt-3">
+        <button id="saveChangesBtn" type="button" class="btn btn-primary" style="background: #16ff00; font-weight: 500">Değişiklikleri Kaydet</button>&nbsp;
+        <button type="button" class="btn btn-default cancel-button" style="color: #fff; border: 1px solid">İptal</button>
+      </div>
+    </div>
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <script src="../Ayarlar.js"></script>
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 20px;
+  background-color: #c9d6ff;
+  background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+}
+h1 {
+  text-align: center;
+  color: #333;
+  text-shadow: 2px 2px 2px #ccc;
+}
+#etkinlikListesi {
+  margin-top: 20px;
+}
+.etkinlik {
+  padding: 10px;
+  border: 1px solid #fff;
+  margin-bottom: 10px;
+  background: #435585;
+  background: linear-gradient(to right, #5c6bc0, #435585);
+  color: #fff;
+  box-shadow: 2px 2px 5px #ccc;
+  transition: transform 0.3s ease;
+}
+.etkinlik:hover {
+  transform: scale(1.02);
+  box-shadow: 3px 3px 10px #aaa;
+}
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+}

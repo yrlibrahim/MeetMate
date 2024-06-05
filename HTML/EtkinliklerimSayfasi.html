@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Etkinliklerim</title>
+    <link rel="stylesheet" href="../CSS/EtkinliklerimSayfasi.css" />
+  </head>
+  <body>
+    <div class="logo">
+      <a href="Anasayfa.html"
+        ><img src="../Images/Logo-not-bg.png" alt="Your Logo"
+      /></a>
+    </div>
+
+    <h1>Oluşturduğum Etkinlikler</h1>
+
+    <div id="etkinlikListesi">
+      <!-- Buraya kullanıcının oluşturduğu etkinlikler dinamik olarak eklenecek -->
+    </div>
+
+    <script>
+      // Kullanıcı tarafından oluşturulan etkinliklerin listeleneceği div
+      const etkinlikListesiDiv = document.getElementById("etkinlikListesi");
+
+      // Kullanıcının oluşturduğu etkinlikleri bu fonksiyonla ekrana ekleyebiliriz
+      function etkinlikEkle(etkinlikAdi) {
+        const etkinlikDiv = document.createElement("div");
+        etkinlikDiv.classList.add("etkinlik");
+        etkinlikDiv.textContent = etkinlikAdi;
+        etkinlikListesiDiv.appendChild(etkinlikDiv);
+      }
+
+      // Örnek olarak birkaç etkinlik ekleyelim (bu kısmı kullanıcı arayüzünden alınan veriyle değiştirebilirsiniz)
+      etkinlikEkle("Yoga Sınıfı");
+      etkinlikEkle("Müzik Konseri");
+      etkinlikEkle("Yürüyüş Organizasyonu");
+    </script>
+  </body>
+</html>

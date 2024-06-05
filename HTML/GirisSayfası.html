@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../CSS/GirisSayfasi.css" />
+    <title>Giriş Sayfası</title>
+  </head>
+
+  <body>
+    <div class="container" id="container">
+      <div class="form-container sign-up">
+        <form>
+          <h1>Hesap Oluştur</h1>
+          <div class="social-icons">
+            <a href="#" class="icon google"
+              ><i class="fa-brands fa-google-plus-g"></i
+            ></a>
+            <a href="#" class="icon facebook"
+              ><i class="fa-brands fa-facebook-f"></i
+            ></a>
+            <a href="#" class="icon github"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+            <a href="#" class="icon linkedin"
+              ><i class="fa-brands fa-linkedin-in"></i
+            ></a>
+          </div>
+          <span>ya da e-mail ile giriş yap</span>
+          <input type="text" placeholder="İsim-Soyisim" required />
+          <input type="text" placeholder="Kullanıcı adı" required />
+          <input type="email" placeholder="Email" required />
+          <input
+            type="text"
+            placeholder="Numara"
+            required
+            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+          />
+          <input type="password" placeholder="Şifre" required />
+
+          <button type="submit">Kayıt Ol</button>
+        </form>
+      </div>
+      <div class="form-container sign-in">
+        <form>
+          <h1>Giriş Yap</h1>
+          <div class="social-icons">
+            <a href="#" class="icon google"
+              ><i class="fa-brands fa-google-plus-g"></i
+            ></a>
+            <a href="#" class="icon facebook"
+              ><i class="fa-brands fa-facebook-f"></i
+            ></a>
+            <a href="#" class="icon github"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+            <a href="#" class="icon linkedin"
+              ><i class="fa-brands fa-linkedin-in"></i
+            ></a>
+          </div>
+          <span>ya da şifreni kullan</span>
+          <input type="email" placeholder="Email" />
+          <input type="password" placeholder="Şifre" />
+          <a href="SifremiUnuttumEkrani.html">Şifremi Unuttum</a>
+          <button type="submit">Giriş Yap</button>
+        </form>
+      </div>
+      <div class="toggle-container">
+        <div class="toggle">
+          <div class="toggle-panel toggle-left">
+            <h1>Tekrar Hoşgeldin!</h1>
+            <p>Zaten bir hesabın var mı ? Giriş Yap!</p>
+            <button class="hidden" id="login">Giriş Yap</button>
+          </div>
+          <div class="toggle-panel toggle-right">
+            <h1>Merhaba!</h1>
+            <p>Site ayrıcalıklarını kullanmak için kayıt ol!</p>
+            <button class="hidden" id="register">Kayıt ol</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../JS/GirisSayfasi.js"></script>
+  </body>
+</html>

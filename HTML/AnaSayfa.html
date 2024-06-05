@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anasayfa</title>
+    <link rel="stylesheet" href="../CSS/Anasayfa.css" />
+    <script
+      src="https://kit.fontawesome.com/1357f9c706.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('searchInput').addEventListener('input', searchContent);
+});
+
+function searchContent() {
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let contents = document.getElementsByClassName('main-content');
+    
+    for (let i = 0; i < contents.length; i++) {
+        let content = contents[i];
+        let textNodes = content.querySelectorAll('.main-content-content-text');
+        let found = false;
+        
+        for (let j = 0; j < textNodes.length; j++) {
+            let textNode = textNodes[j];
+            let originalText = textNode.textContent || textNode.innerText;
+
+            if (input && originalText.toLowerCase().indexOf(input) > -1) {
+                textNode.innerHTML = originalText.replace(new RegExp(input, 'gi'), match => `<mark>${match}</mark>`);
+                found = true;
+            } else {
+                textNode.innerHTML = originalText;
+            }
+        }
+        
+        content.style.display = found || !input ? "" : "none";
+    }
+}
+
+function clearSearch() {
+    let contents = document.getElementsByClassName('main-content');
+
+    for (let i = 0; i < contents.length; i++) {
+        let content = contents[i];
+        let textNodes = content.querySelectorAll('.main-content-content-text');
+
+        for (let j = 0; j < textNodes.length; j++) {
+            let textNode = textNodes[j];
+            let originalText = textNode.textContent || textNode.innerText;
+            textNode.innerHTML = originalText;  // Tüm işaretlemeleri kaldır
+        }
+
+        content.style.display = '';  // Tüm içerikleri yeniden görünür yap
+    }
+}
+
+// Harita alanını oluştur
+function initMap() {
+  var kahramanmarasMerkez = { lat: 37.5794, lng: 36.937 };
+  var harita = new google.maps.Map(document.getElementById("harita-alani"), {
+    zoom: 12,
+    center: kahramanmarasMerkez,
+  });
+
+  // Konumlar
+  var konumlar = [
+    { lat: 37.5768056, lng: 36.9308611, baslik: "Şelale Park" },
+    { lat: 37.582861, lng: 36.889833, baslik: "Aliya İzzet Begoviç Parkı" },
+    { lat: 37.591889, lng: 36.867861, baslik: "Tatlı Park Binevler" },
+    { lat: 37.587694, lng: 36.807972, baslik: "KSÜ Mühendislik Fakültesi" },
+    { lat: 37.570694, lng: 36.851389, baslik: "Boğaziçi Halısaha" },
+  ];
+
+  // Her konum için işaretçi ekle
+  konumlar.forEach(function (konum) {
+    var marker = new google.maps.Marker({
+      position: { lat: konum.lat, lng: konum.lng },
+      map: harita,
+      title: konum.baslik,
+    });
+  });
+}
+
+</script>
+
+  <body>
+    <!--Navbar-Start-->
+    <nav class="navbar">
+      <img src="../Images/Logo-not-bg.png" alt="" class="logo" />
+      <!-- Search div within Navbar -->
+      <div class="search">
+        <span class="search-icon">
+          <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #00174f" onclick="searchContent()"></i>
+        </span>
+        <input type="search" class="search-input" placeholder="Ara..." id="searchInput" />
+      </div>
+
+      <img
+        src="../Images/user.png"
+        class="profile-pic"
+        onclick="toogleMenu()"
+      />
+      <div class="drop-menu-wrap" id="dropMenu">
+        <div class="drop-menu">
+          <div class="user-info">
+            <img src="../Images/user.png" />
+            <h2>Ahmet Akdere</h2>
+          </div>
+          <hr />
+          <a href="KullaniciProfili.html" class="drop-menu-link"
+            ><i class="fa-solid fa-user fa-lg" style="color: #00174f"></i>
+            <p>Profil</p>
+            <span>></span>
+          </a>
+          <a
+            href="GirisSayfası.html"
+            class="drop-menu-link drop-menu-link-logout"
+            ><i
+              class="fa-solid fa-right-from-bracket fa-lg"
+              style="color: #ff2e2e"
+            ></i>
+            <p>Çıkış</p>
+            <span>></span>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!--Navbar-End-->
+    <!--Aside Start-->
+    <aside class="sidebar container">
+      <div class="logo-content">
+        <div class="logo">
+          <img src="../Images/MeetMateLogoNotBG.png" style="width: 50px" class="aside-logo" />
+          <i class="fa-solid fa-bars fa-lg" style="color: #00174f" id="btn"></i>
+        </div>
+      </div>
+      <ul class="sidebar-list">
+        <li class="sidebar-profil">
+          <a href="KullaniciProfili.html" class="sidebar-link"
+            ><i class="fa-solid fa-user fa-lg" style="color: #00174f"></i>
+            <p class="link-name">Profil</p>
+          </a>
+        </li>
+        <li class="sidebar-settings">
+          <a href="Ayarlar.html" class="sidebar-link"
+            ><i class="fa-solid fa-gear fa-lg" style="color: #00174f"></i>
+            <p class="link-name">Ayarlar</p>
+          </a>
+        </li>
+        <li class="sidebar-activities">
+          <a href="EtkinliklerimSayfasi.html" class="sidebar-link"
+            ><i
+              class="fa-solid fa-calendar-days fa-lg"
+              style="color: #00174f"
+            ></i>
+            <p class="link-name">Etkinlikler</p>
+          </a>
+        </li>
+        <li class="sidebar-location">
+          <a href="map.html" class="sidebar-link"
+            ><i
+              class="fa-solid fa-location-dot fa-lg"
+              style="color: #00174f"
+            ></i>
+            <p class="link-name">Lokasyonlar</p>
+          </a>
+        </li>
+        <li class="sidebar-logout">
+          <a href="GirisSayfası.html" class="sidebar-link"
+            ><i
+              class="fa-solid fa-right-from-bracket fa-lg"
+              style="color: #ff2e2e"
+            ></i>
+            <p class="link-name">Çıkış</p>
+          </a>
+        </li>
+      </ul>
+    </aside>
+    <!--Aside End-->
+    <!--MAİN START-->
+    <main class="">
+      <!--Tweet Part-->
+      <div class="tweet">
+        <div class="input-box">
+          <div class="tweet-area">
+            <span class="placeholder">Ne yapacağız ?</span>
+            <div
+              class="input editable"
+              contenteditable="true"
+              spellcheck="false"
+            ></div>
+            <div
+              class="input readonly"
+              contenteditable="true"
+              spellcheck="false"
+            ></div>
+          </div>
+        </div>
+        <hr />
+        <div class="bottom">
+          <ul class="icons">
+            <!--Dosya Ekleme-->
+            <li style="color: #002379">
+              <label for="file-upload" style="cursor: pointer;">
+                <i class="fa-solid fa-image fa-lg"></i>
+                <input type="file" id="file-upload" style="display:none;" accept="image/*" onchange="handleFileSelect(event)">
+              </label>
+            </li>
+            <!--Tarih Seçme-->
+            <li class="fa-solid fa-calendar-days fa-lg" style="color: #002379" id="date-picker-button"></li>
+          <input type="date" id="date-picker" style="display:none;">
+          <!--Lokasyon Pini-->
+            <li
+              class="fa-solid fa-location-dot fa-lg"
+              style="color: #002379"
+            ><a href="map.html"></a></li>
+          <!--Başlık Seçme-->
+            <li style="color: #002379" class="tweet-dropdown">
+              <button class="tweet-dropbtn" id="selectedItem">Etkinlik Türü</button>
+                <div class="tweet-dropdown-content">
+        <a href="#" onclick="selectItem('Maç')">Maç</a>
+        <a href="#" onclick="selectItem('Düğün')">Düğün</a>
+        <a href="#" onclick="selectItem('Buluşma')">Buluşma</a>
+        <a href="#" onclick="selectItem('Konser')">Konser</a>
+        <a href="#" onclick="selectItem('Seyahat')">Seyahat</a>
+                </div>
+            </li>
+          </ul>
+          <div class="content">
+            <span class="counter">60</span>
+            <button>Gönder</button>
+          </div>
+        </div>
+      </div>
+      <!--Tweet Part End-->
+      <!--Content Part-->
+      <!--Content 1-->
+      <div class="main-content">
+        <div class="main-content-profile">
+          <a href="KullaniciProfili.html"
+            ><img src="../Images/user.png" alt="" class="main-content-profile-logo"
+          /></a>
+          <a href="KullaniciProfili.html">@akdereahmet</a>
+          <span class="etkinlik-turu"><b>Etkinlik Türü:</b></span>
+          <span class="etkinlik-turu2" id="etkinlik-turu">Maç</span>
+          <span class="katilimci-sayisi" id="katilimci-sayisi">3</span>
+          <span class="katilimci-sayisi2" id="katilimci-sayisi2"> Kişi</span>
+        </div>
+        <hr />
+        <div class="main-content-content">
+          <p class="main-content-content-text">
+            Halısaha için 3 kişiye ihtiyacım var. Kim gelebilir ?
+          </p>
+          <span class="main-content-content-date">
+            25 Mayıs 2024 
+          </span>
+          <span class="main-content-content-time">23:00-00:00</span>
+          <div class="main-content-content-location">Boğaziçi Halısaha</div>
+          <img src="../Images/hali-saha.jpg" alt="" class="main-content-content-img" />
+          <div class="main-content-content-selection">
+            <div class="main-content-content-up" id="clicker1">
+              <i class="fa-regular fa-thumbs-up fa-lg"></i>
+              <span>Katılıyorum</span>
+            </div>
+            <div class="main-content-content-down" id="clicker2">
+              <i class="fa-regular fa-thumbs-down fa-lg"></i>
+              <span>Katılmıyorum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Content 2-->
+      <div class="main-content">
+        <div class="main-content-profile">
+          <a href="KullaniciProfili.html"
+            ><img src="../Images/logo.png" alt="" class="main-content-profile-logo"
+          /></a>
+          <a href="KullaniciProfili.html">@ipekci_cemill</a>
+          <span class="etkinlik-turu"><b>Etkinlik Türü:</b></span>
+          <span class="etkinlik-turu2" id="etkinlik-turu">Buluşma</span>
+          <span class="katilimci-sayisi" id="katilimci-sayisi">5</span>
+          <span class="katilimci-sayisi2" id="katilimci-sayisi2"> Kişi</span>
+        </div>
+        <hr />
+        <div class="main-content-content">
+          <p class="main-content-content-text">
+            Doğum günümde çok yalnızım. Kim benimle pasta yemeye gelir ?
+          </p>
+          <span class="main-content-content-date">
+            30 Mayıs 2024 
+          </span>
+          <span class="main-content-content-time">17:00-18:00</span>
+          <div class="main-content-content-location">Kervan Pastanesi</div>
+          <img src="../Images/dogumgunu.png" alt="" class="main-content-content-img" />
+          <div class="main-content-content-selection">
+            <div class="main-content-content-up" id="clicker1">
+              <i class="fa-regular fa-thumbs-up fa-lg"></i>
+              <span>Katılıyorum</span>
+            </div>
+            <div class="main-content-content-down" id="clicker2">
+              <i class="fa-regular fa-thumbs-down fa-lg"></i>
+              <span>Katılmıyorum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Content 3-->
+      <div class="main-content">
+        <div class="main-content-profile">
+          <a href="KullaniciProfili.html"
+            ><img src="../Images/woman.png" alt="" class="main-content-profile-logo"
+          /></a>
+          <a href="KullaniciProfili.html">@busra-ahmet</a>
+          <span class="etkinlik-turu"><b>Etkinlik Türü:</b></span>
+          <span class="etkinlik-turu2" id="etkinlik-turu">Düğün</span>
+          <span class="katilimci-sayisi" id="katilimci-sayisi">13</span>
+          <span class="katilimci-sayisi2" id="katilimci-sayisi2"> Kişi</span>
+        </div>
+        <hr />
+        <div class="main-content-content">
+          <p class="main-content-content-text"></p>
+            Düğünümde halay çekecek insanlara ihtiyacım var !!! 
+          </p>
+          <span class="main-content-content-date">
+            25 Haziran 2024 
+          </span>
+          <span class="main-content-content-time">21:00-23:00</span>
+          <div class="main-content-content-location">Hünkar Düğün Salonu</div>
+          <img src="../Images/dugun.png" alt="" class="main-content-content-img" />
+          <div class="main-content-content-selection">
+            <div class="main-content-content-up" id="clicker1">
+              <i class="fa-regular fa-thumbs-up fa-lg"></i>
+              <span>Katılıyorum</span>
+            </div>
+            <div class="main-content-content-down" id="clicker2">
+              <i class="fa-regular fa-thumbs-down fa-lg"></i>
+              <span>Katılmıyorum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Content 4-->
+      <div class="main-content">
+        <div class="main-content-profile">
+          <a href="KullaniciProfili.html"
+            ><img src="../Images/man.png" alt="" class="main-content-profile-logo"
+          /></a>
+          <a href="KullaniciProfili.html">@yolların_kralıı</a>
+          <span class="etkinlik-turu"><b>Etkinlik Türü:</b></span>
+          <span class="etkinlik-turu2" id="etkinlik-turu">Seyahat</span>
+          <span class="katilimci-sayisi" id="katilimci-sayisi">2</span>
+          <span class="katilimci-sayisi2" id="katilimci-sayisi2"> Kişi</span>
+        </div>
+        <hr />
+        <div class="main-content-content">
+          <p class="main-content-content-text">
+            İstanbul yolunda 3 kişilik yerim var. 
+          </p>
+          <span class="main-content-content-date">
+            1 Haziran 2024 
+          </span>
+          <span class="main-content-content-time">09:00-:09:30</span>
+          <div class="main-content-content-location">Üniversite Civarı</div>
+          <img src="../Images/araba-ile-yurtdisi-seyahat-.jpg" alt="" class="main-content-content-img" />
+          <div class="main-content-content-selection">
+            <div class="main-content-content-up" id="clicker1">
+              <i class="fa-regular fa-thumbs-up fa-lg"></i>
+              <span>Katılıyorum</span>
+            </div>
+            <div class="main-content-content-down" id="clicker2">
+              <i class="fa-regular fa-thumbs-down fa-lg"></i>
+              <span>Katılmıyorum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!--MAİN END-->
+    <!--Right Side Start-->
+    <div class="right-side">
+      <p>#Çevrede Neler Oluyor ?!</p>
+      <div class="right-side-input" id="harita-alani" style="width: 100%; height: 300px;">
+        
+        <hr>
+        <!-- Harita alanı -->
+      </div>
+    </div>
+    
+    <!--Right Side End-->
+    <script src="../JS/Anasayfa.js"></script>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-rBlcK3o5PSgLHoWgw2ztz-Gj4Zsb7b4&callback=initMap"
+    async
+    defer
+></script>
+  </body>
+</html>
